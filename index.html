@@ -129,11 +129,69 @@
   height: auto;
   object-fit: contain;
 }
+
+/* CARDS ABAIXO DO LOGO */
+  .top-cards {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    margin-bottom: 10px;
+  }
+
+  .top-card {
+    background: #ffffff;
+    width: 45%;
+    margin: 5px;
+    padding: 12px;
+    border-radius: 12px;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+    text-align: center;
+  }
+
+  .top-card h3 {
+    margin: 0;
+    font-size: 14px;
+    color: #555;
+  }
+
+  .top-card p {
+    margin: 5px 0 0;
+    font-size: 18px;
+    font-weight: bold;
+    color: #000;
+  }
+
+
 </style>
 </head>
 <body>
 <div class="logo-container">
   <img src="./MOV.png" alt="Logo MOV" />
+</div>
+
+<!-- SEÇÃO: CARDS DINÂMICOS ABAIXO DO LOGO -->
+<div class="top-cards">
+  <div class="top-card">
+    <h3>💰 Ganhos Acumulado</h3>
+    <p id="lucroLiquido">R$ 0,00</p>
+  </div>
+  <div class="top-card">
+    <h3>🎯 Meta Mensal</h3>
+    <p id="metaExibida">R$ 0,00</p>
+  </div>
+</div>
+
+<!-- BARRA DE PROGRESSO SUPERIOR -->
+<div class="card" style="text-align:center; padding:10px;">
+  <p style="margin:5px 0; font-weight:bold; color:#333;">
+    <span id="progressoPercent">0%</span> da meta atingida
+  </p>
+  <div class="barra-progresso">
+    <div class="preenchimento" id="progressoPercent"></div>
+  </div>
+    <div class="progress-bar">
+    <div class="progress-fill" id="progressFill"></div>
+  </div>
 </div>
 
 <h1>Controle de corridas</h1>
@@ -163,14 +221,10 @@
 <div class="card resumo">
   <p><strong>Total Ganho no Mês:</strong> R$ <span id="totalGanhos">0.00</span></p>
   <p><strong>Total Gasto com Gasolina:</strong> R$ <span id="totalGastos">0.00</span></p>
-  <p><strong>Lucro Líquido:</strong> R$ <span id="lucroLiquido">0.00</span></p>
-  <p><strong>Meta do Mês:</strong> R$ <span id="metaExibida">0.00</span></p>
   <p><strong>Dias Trabalhados:</strong> <span id="diasTrabalhados">0</span></p>
-  <p><strong>Progresso:</strong> <span id="progressoPercent">0%</span></p>
-  <div class="progress-bar">
-    <div class="progress-fill" id="progressFill"></div>
-  </div>
+ 
 </div>
+
 
 <div class="card list-section">
   <h4>Ganhos Diários</h4>
