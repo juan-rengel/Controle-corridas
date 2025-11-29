@@ -425,123 +425,105 @@ function atualizarListas() {
     document.body.removeChild(link);
   }
 
-  // ---------------- CALENDÁRIO DE DIAS TRABALHADOS ----------------
+
+
+
+  /* ===========================
+   CALENDÁRIO – MODO INDEPENDENTE
+   =========================== */
+
+(function initCalendarPage() {
   const calendarEl = document.getElementById("calendar");
   const monthLabelCal = document.getElementById("monthLabelCal");
   const prevMonthCal = document.getElementById("prevMonthCal");
   const nextMonthCal = document.getElementById("nextMonthCal");
 
-  let currentCalDate = new Date();
+  // se não estiver na página de calendário, não roda nada
+  if (!calendarEl) return;
+
+  const mesAtual = new Date().toISOString().slice(0, 7);
 
   function loadWorkedDays(mes) {
     return JSON.parse(localStorage.getItem("worked_" + mes)) || {};
   }
 
-  function saveWorkedDays(mes, dados) {
-    localStorage.setItem("worked_" + mes, JSON.stringify(dados));
+  function saveWorkedDays(mes, obj) {
+    localStorage.setItem("worked_" + mes, JSON.stringify(obj));
   }
 
-  function renderCalendar() {
-    if (!calendarEl || !monthLabelCal) return;
+  function renderCalendar(mesRef) {
+    const [ano, mes] = mesRef.split("-").map(Number);
+    const worked = loadWorkedDays(mesRef);
 
-    const mesRef = selectMes ? selectMes.value : getMesAtual();
-    const [ano, mesNum] = mesRef.split("-").map(Number);
+    const date = new Date(ano, mes - 1, 1);
+    const firstDay = date.getDay();
+    const totalDays = new Date(ano, mes, 0).getDate();
 
-    currentCalDate = new Date(ano, mesNum - 1, 1);
-
-    const year = currentCalDate.getFullYear();
-    const month = currentCalDate.getMonth();
-
-    const workedDays = loadWorkedDays(mesRef);
-
-    monthLabelCal.textContent = currentCalDate.toLocaleString("pt-BR", {
+    monthLabelCal.textContent = date.toLocaleString("pt-BR", {
       month: "long",
       year: "numeric"
     });
 
     calendarEl.innerHTML = "";
 
-    const firstDay = new Date(year, month, 1).getDay();
-    const totalDays = new Date(year, month + 1, 0).getDate();
-
+    // dias vazios antes do primeiro dia
     for (let i = 0; i < firstDay; i++) {
-      const empty = document.createElement("div");
-      empty.classList.add("calendar-day");
-      empty.style.visibility = "hidden";
-      calendarEl.appendChild(empty);
+      const div = document.createElement("div");
+      div.classList.add("calendar-day");
+      div.style.visibility = "hidden";
+      calendarEl.appendChild(div);
     }
 
-    for (let day = 1; day <= totalDays; day++) {
-      const mesStr = String(month + 1).padStart(2, "0");
-      const diaStr = String(day).padStart(2, "0");
-      const key = `${year}-${mesStr}-${diaStr}`;
+    // gera os dias
+    for (let d = 1; d <= totalDays; d++) {
+      const diaStr = String(d).padStart(2, "0");
+      const mesStr = String(mes).padStart(2, "0");
+      const key = `${ano}-${mesStr}-${diaStr}`;
 
-      const dayEl = document.createElement("div");
-      dayEl.classList.add("calendar-day");
-      dayEl.textContent = day;
+      const div = document.createElement("div");
+      div.classList.add("calendar-day");
+      div.textContent = d;
 
-      if (workedDays[key]) {
-        dayEl.classList.add("worked");
-      }
+      if (worked[key]) div.classList.add("worked");
 
-      dayEl.addEventListener("click", () => {
-        const worked = loadWorkedDays(mesRef);
-
-        if (worked[key]) {
-          delete worked[key];
-          dayEl.classList.remove("worked");
-        } else {
-          worked[key] = true;
-          dayEl.classList.add("worked");
-        }
+      div.onclick = () => {
+        if (worked[key]) delete worked[key];
+        else worked[key] = true;
 
         saveWorkedDays(mesRef, worked);
+        renderCalendar(mesRef);
 
-        if (diasTrabalhadosSpan) {
+        const diasTrabalhadosSpan = document.getElementById("diasTrabalhados");
+        if (diasTrabalhadosSpan)
           diasTrabalhadosSpan.textContent = Object.keys(worked).length;
-        }
-      });
+      };
 
-      calendarEl.appendChild(dayEl);
+      calendarEl.appendChild(div);
     }
 
-    if (diasTrabalhadosSpan) {
-      diasTrabalhadosSpan.textContent = Object.keys(workedDays).length;
-    }
+    const span = document.getElementById("diasTrabalhados");
+    if (span) span.textContent = Object.keys(worked).length;
   }
 
+  let mesAtualCal = mesAtual;
+
+  renderCalendar(mesAtualCal);
+
   if (prevMonthCal) {
-    prevMonthCal.addEventListener("click", () => {
-      const mesRef = selectMes ? selectMes.value : getMesAtual();
-      const [ano, mes] = mesRef.split("-").map(Number);
-      const novo = new Date(ano, mes - 2, 1);
-      const novoMes = novo.toISOString().slice(0, 7);
-      if (selectMes) selectMes.value = novoMes;
-      carregarDadosMes(novoMes);
-      renderCalendar();
-    });
+    prevMonthCal.onclick = () => {
+      const [a, m] = mesAtualCal.split("-").map(Number);
+      const d = new Date(a, m - 2, 1);
+      mesAtualCal = d.toISOString().slice(0, 7);
+      renderCalendar(mesAtualCal);
+    };
   }
 
   if (nextMonthCal) {
-    nextMonthCal.addEventListener("click", () => {
-      const mesRef = selectMes ? selectMes.value : getMesAtual();
-      const [ano, mes] = mesRef.split("-").map(Number);
-      const novo = new Date(ano, mes, 1);
-      const novoMes = novo.toISOString().slice(0, 7);
-      if (selectMes) selectMes.value = novoMes;
-      carregarDadosMes(novoMes);
-      renderCalendar();
-    });
+    nextMonthCal.onclick = () => {
+      const [a, m] = mesAtualCal.split("-").map(Number);
+      const d = new Date(a, m, 1);
+      mesAtualCal = d.toISOString().slice(0, 7);
+      renderCalendar(mesAtualCal);
+    };
   }
-
-  // ---------------- INICIALIZAÇÃO ----------------
-  (function init() {
-    popularSelectsMes();
-    const mesBase = selectMes ? selectMes.value : getMesAtual();
-    carregarDadosMes(mesBase);
-    renderCalendar();
-     loadWorkedDays()
-        saveWorkedDays()
-  })();
-
-
+})();

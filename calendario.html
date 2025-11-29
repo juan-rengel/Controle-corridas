@@ -25,11 +25,20 @@
   <img src="MOV.png" alt="Logo MOV" />
 </div>
 
-<h2 style="color:white; text-align:center;">Calendário de Dias Trabalhados</h2>
+<h2 class="page-title">Calendário de Dias Trabalhados</h2>
 
-<!-- Contador -->
-<div class="card resumo">
-  <p><strong>Dias Trabalhados:</strong> <span id="diasTrabalhados">0</span></p>
+<!-- CARD RESUMO DIAS TRABALHADOS -->
+<div class="calendar-summary-card fade-in">
+  <div>
+    <span class="summary-label">Dias Trabalhados</span>
+    <div class="summary-value">
+      <span id="diasTrabalhados">0</span>
+      <span class="summary-suffix">dias</span>
+    </div>
+  </div>
+  <div class="summary-icon">
+    📅
+  </div>
 </div>
 
 <!-- CONTAINER DO CALENDÁRIO -->
@@ -38,16 +47,27 @@
   <div class="calendar-header">
       <button id="prevMonthCal">◀</button>
 
-      <h2 id="monthLabelCal" style="width:100%; text-align:center; margin:0; font-size:18px;"></h2>
+      <h2 id="monthLabelCal"></h2>
 
       <button id="nextMonthCal">▶</button>
   </div>
 
+  <!-- DIAS DA SEMANA -->
+  <div class="calendar-weekdays">
+      <div>Dom</div>
+      <div>Seg</div>
+      <div>Ter</div>
+      <div>Qua</div>
+      <div>Qui</div>
+      <div>Sex</div>
+      <div>Sab</div>
+  </div>
+
+  <!-- AQUI OS DIAS DO MÊS SERÃO GERADOS -->
   <div class="calendar" id="calendar"></div>
 
 </div>
 
-<script src="menu.js"></script>
 <script src="script.js"></script>
 
 </body>
