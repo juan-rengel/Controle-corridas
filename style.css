@@ -1,0 +1,543 @@
+  body {
+    font-family: Arial, sans-serif;
+    background: #004AAD;
+    margin: 0;
+    padding: 20px;
+    max-width: 480px;
+    margin-left: auto;
+    margin-right: auto;
+    box-sizing: border-box;
+  }
+  h1, h2, h3 {
+    color: #ffffff;
+  }
+  label {
+    font-weight: bold;
+  }
+  select, input[type="number"] {
+    width: 100%;
+    padding: 8px;
+    margin-top: 6px;
+    margin-bottom: 12px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+    box-sizing: border-box;
+  }
+  button {
+    padding: 8px 14px;
+    font-size: 15px;
+    background: #3498db;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    margin: 4px 2px;
+  }
+  button:hover {
+    background: #2980b9;
+  }
+  .btn-limpar {
+    background: #e74c3c;
+  }
+  .card {
+    background: white;
+    padding: 15px 20px;
+    margin-bottom: 20px;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(26, 0, 0, 0.644);
+  }
+  .progress-bar {
+    width: 100%;
+    background: #ddd;
+    height: 24px;
+    border-radius: 12px;
+    overflow: hidden;
+    margin-top: 10px;
+  }
+  .progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #2ecc71, #27ae60);
+    width: 0;
+    transition: width 0.4s ease;
+  }
+  .resumo {
+    font-size: 18px;
+    text-align: center;
+  }
+  .list-section {
+    max-height: 150px;
+    overflow-y: auto;
+    margin-top: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 6px 10px;
+    background: #fafafa;
+  }
+  .list-section h4 {
+    margin: 5px 0;
+    color: #333;
+  }
+  .list-section ul {
+    padding-left: 20px;
+    margin: 0;
+  }
+  .list-section li {
+    font-size: 14px;
+    margin-bottom: 4px;
+  }
+
+  @media (max-width: 500px) {
+    body {
+      max-width: 100%;
+      padding: 15px 10px;
+    }
+    h1 {
+      font-size: 24px;
+    }
+    input[type="number"], select {
+      font-size: 18px;
+    }
+    button {
+      font-size: 17px;
+      padding: 12px 20px;
+    }
+    .card {
+      padding: 12px 15px;
+    }
+    .list-section {
+      max-height: 120px;
+      padding: 8px 10px;
+    }
+  }
+
+  .logo-container {
+    text-align: center;
+    margin-bottom: 15px;
+  }
+
+  .logo-container img {
+    max-width: 180px;
+    width: 60%;
+    height: auto;
+    object-fit: contain;
+  }
+
+  /* CARDS ABAIXO DO LOGO */
+  .top-cards {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    margin-bottom: 10px;
+  }
+
+  .top-card {
+    background: #ffffff;
+    width: 45%;
+    margin: 5px;
+    padding: 12px;
+    border-radius: 12px;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+    text-align: center;
+  }
+
+  .top-card h3 {
+    margin: 0;
+    font-size: 14px;
+    color: #555;
+  }
+
+  .top-card p {
+    margin: 5px 0 0;
+    font-size: 18px;
+    font-weight: bold;
+    color: #000;
+  }
+
+  .calendar-container {
+    background: #ffffff;
+    padding: 12px;
+    border-radius: 12px;
+  }
+
+  .calendar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+
+  .calendar-header button {
+    background: #004AAD;
+    color: white;
+    padding: 6px 12px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+
+  .calendar {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 5px;
+    margin-top: 8px;
+  }
+
+  .calendar-day {
+    padding: 10px;
+    background: #ddd;
+    border-radius: 6px;
+    text-align: center;
+    font-weight: bold;
+    cursor: pointer;
+  }
+
+  .calendar-day.worked {
+    background: #4CAF50;
+    color: white;
+  }
+
+  /* Páginas internas */
+  .page {
+    display: none;
+  }
+  .page.active {
+    display: block;
+  }
+
+  /* MENU LATERAL (HAMBÚRGUER) */
+  .hamburger {
+    position: fixed;
+    top: 15px;
+    left: 15px;
+    background: #ffffff;
+    color: #004AAD;
+    padding: 8px 10px;
+    border-radius: 8px;
+    font-size: 20px;
+    cursor: pointer;
+    z-index: 1100;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+  }
+
+  .sidebar {
+    position: fixed;
+    top: 0;
+    left: -220px;
+    width: 200px;
+    height: 100%;
+    background: #002f73;
+    padding-top: 60px;
+    transition: left 0.3s ease;
+    z-index: 1000;
+  }
+
+  .sidebar.open {
+    left: 0;
+  }
+
+  .sidebar a {
+    display: block;
+    padding: 12px 20px;
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 16px;
+  }
+
+  .sidebar a:hover {
+    background: #0050b3;
+  }
+
+  .sidebar-title {
+    position: absolute;
+    top: 15px;
+    left: 20px;
+    color: #fff;
+    font-weight: bold;
+  }
+
+  body.has-sidebar {
+    padding-left: 0; /* visual base permanece */
+  }
+
+
+
+  /* ------ DASHBOARD PREMIUM ------ */
+
+.dashboard-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  margin-top: 10px;
+}
+
+.dash-card {
+  display: flex;
+  align-items: center;
+  background: #ffffff;
+  padding: 16px;
+  border-radius: 18px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+  transition: 0.25s ease-in-out;
+}
+
+.dash-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.22);
+}
+
+.dash-icon {
+  width: 60px;
+  height: 60px;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 15px;
+}
+
+.icon-img {
+  width: 34px;
+  filter: brightness(1000%);
+}
+
+.dash-info h3 {
+  margin: 0;
+  font-size: 15px;
+  color: #555;
+}
+
+.dash-info p {
+  margin: 4px 0 0;
+  font-size: 22px;
+  font-weight: bold;
+  color: #000;
+}
+
+/* ---- CARD RESUMO ---- */
+
+.summary-card {
+  background: white;
+  padding: 18px 20px;
+  border-radius: 18px;
+  margin-top: 20px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+}
+
+.summary-card h3 {
+  margin-top: 0;
+  margin-bottom: 12px;
+  color: #222;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.summary-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 6px 0;
+  font-size: 16px;
+}
+
+.summary-row strong {
+  color: #000;
+}
+
+/* Animação suave */
+.fade-in {
+  animation: fadeIn 0.8s ease forwards;
+  opacity: 0;
+}
+
+@keyframes fadeIn {
+  from {opacity: 0; transform: translateY(10px);}
+  to   {opacity: 1; transform: translateY(0);}
+}
+
+
+/* ------- BARRA DE PROGRESSO PREMIUM ------- */
+
+.progress-card {
+  background: #ffffff;
+  padding: 18px;
+  border-radius: 20px;
+  margin-top: 20px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+  text-align: center;
+}
+
+.progress-card h3 {
+  margin: 0 0 10px;
+  color: #222;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.progress-container {
+  width: 100%;
+  height: 22px;
+  background: #e6e6e6;
+  border-radius: 15px;
+  overflow: hidden;
+  margin-top: 10px;
+}
+
+.progress-bar-pro {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, #00c853, #1de9b6);
+  border-radius: 15px;
+  transition: width 0.5s ease;
+}
+
+.progress-text {
+  margin-top: 10px;
+  font-size: 16px;
+  color: #333;
+  font-weight: bold;
+}
+
+
+/* ===== CARDS DE REGISTRO PRO ===== */
+.reg-card {
+  background: #ffffff;
+  padding: 16px;
+  border-radius: 18px;
+  display: flex;
+  align-items: flex-start;
+  gap: 15px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+  margin-bottom: 18px;
+  transition: 0.25s ease;
+}
+
+.reg-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 22px rgba(0,0,0,0.25);
+}
+
+.reg-icon {
+  width: 55px;
+  height: 55px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 26px;
+  color: #fff;
+}
+
+.reg-content {
+  flex: 1;
+}
+
+.reg-content label {
+  font-weight: bold;
+  font-size: 15px;
+  color: #444;
+}
+
+.reg-content input,
+.reg-content select {
+  width: 100%;
+  padding: 10px;
+  margin-top: 6px;
+  margin-bottom: 10px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+}
+
+.reg-content button {
+  background: #3498db;
+  color: white;
+  padding: 10px 14px;
+  border: none;
+  border-radius: 10px;
+  font-size: 16px;
+  cursor: pointer;
+  width: 100%;
+}
+
+.reg-content button:hover {
+  background: #217dbb;
+}
+
+/* animação */
+.fade-in {
+  animation: fadeIn 0.8s ease forwards;
+  opacity: 0;
+}
+
+@keyframes fadeIn {
+  from {opacity: 0; transform: translateY(10px);}
+  to   {opacity: 1; transform: translateY(0);}
+}
+
+
+/* ===== LISTAS PRO ===== */
+
+.list-card {
+  background: #ffffff;
+  padding: 16px;
+  border-radius: 18px;
+  margin-bottom: 18px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+}
+
+.list-card h3 {
+  margin: 0 0 12px;
+  font-size: 18px;
+  color: #222;
+}
+
+/* estilo da UL */
+.pro-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* cada item */
+.pro-list li {
+  background: #f8f9fa;
+  border-radius: 12px;
+  padding: 12px 14px;
+  margin-bottom: 10px;
+  font-size: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-left: 5px solid #3498db;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+/* tipo de item diferenciado */
+.pro-list li.ganho { border-left-color: #2ecc71; }
+.pro-list li.gasolina { border-left-color: #e67e22; }
+.pro-list li.transferencia { border-left-color: #9b59b6; }
+.pro-list li.mecanica { border-left-color: #c0392b; }
+
+/* texto esquerdo */
+.pro-list li span.desc {
+  font-weight: 600;
+  color: #333;
+}
+
+/* valor do item */
+.pro-list li span.valor {
+  font-weight: bold;
+  color: #000;
+}
+
+/* animação suave */
+.fade-in {
+  animation: fadeIn 0.8s ease forwards;
+  opacity: 0;
+}
+
+@keyframes fadeIn {
+  from {opacity: 0; transform: translateY(10px);}
+  to   {opacity: 1; transform: translateY(0);}
+}

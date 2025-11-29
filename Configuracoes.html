@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Configurações - MOB</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- Botão hambúrguer -->
+<div class="hamburger" id="hamburger">☰</div>
+
+<!-- Menu lateral -->
+<nav class="sidebar" id="sidebar">
+  <div class="sidebar-title">MOB Menu</div>
+  <a href="Dashboard.html">🏠 Dashboard</a>
+  <a href="Registros.html">📝 Registros</a>
+  <a href="calendario.html">📅 Calendário</a>
+  <a href="Configuracoes.html">⚙️ Configurações</a>
+</nav>
+
+<!-- LOGO -->
+<div class="logo-container">
+  <img src="MOV.png" alt="Logo MOV" />
+</div>
+
+<h2 style="color:white; text-align:center;">Configurações</h2>
+
+<!-- EXPORTAR CSV -->
+<div class="card">
+  <h3>📤 Exportar Dados (CSV)</h3>
+  <p>Baixe todos os registros do mês atual em formato CSV.</p>
+  <button id="btnExportar" style="width:100%;">Exportar CSV</button>
+</div>
+
+<!-- LIMPAR DADOS DO MÊS -->
+<div class="card">
+  <h3>🧹 Limpar Dados do Mês</h3>
+  <p>Apaga ganhos, gastos, transferências e mecânicas do mês selecionado.</p>
+  <label>Mês Atual:</label>
+  <select id="selectMesConfig"></select>
+  <button id="btnLimparMes" class="btn-limpar" style="width:100%;">Limpar Dados do Mês</button>
+</div>
+
+<!-- LIMPAR TODOS OS MESES -->
+<div class="card">
+  <h3>⚠️ Limpar Tudo</h3>
+  <p>Remove TODOS os meses e TODOS os dados do aplicativo.</p>
+  <button id="btnLimparTudo" class="btn-limpar" style="width:100%;">Limpar Tudo</button>
+</div>
+
+<!-- SOBRE -->
+<div class="card">
+  <h3>ℹ️ Sobre o Aplicativo</h3>
+  <p><strong>MOB Controle de Corridas</strong></p>
+  <p>Versão: 1.0</p>
+  <p>Desenvolvido para controle completo de:</p>
+  <ul>
+    <li>Ganhos</li>
+    <li>Gastos com gasolina</li>
+    <li>Transferências</li>
+    <li>Despesas mecânicas</li>
+    <li>Dias trabalhados</li>
+  </ul>
+</div>
+
+<script src="menu.js"></script>
+<script src="script.js"></script>
+
+<script>
+// Preenche lista de meses
+window.addEventListener("DOMContentLoaded", () => {
+  const select = document.getElementById("selectMesConfig");
+  
+  // Usamos a mesma função que o Registros.html usa
+  if (typeof listarMeses === "function") {
+    const meses = listarMeses();
+    const mesAtual = new Date().toISOString().slice(0,7);
+
+    if (!meses.includes(mesAtual)) meses.unshift(mesAtual);
+
+    meses.forEach(m => {
+      const opt = document.createElement("option");
+      opt.value = m;
+      opt.textContent = m.split("-").reverse().join("/");
+      select.appendChild(opt);
+    });
+
+    select.value = mesAtual;
+  }
+
+  // Botão limpar mês
+  document.getElementById("btnLimparMes").addEventListener("click", () => {
+    const mes = select.value;
+
+    if (confirm("Deseja realmente limpar os dados do mês " + mes + "?")) {
+      localStorage.removeItem("mob_" + mes);
+      localStorage.removeItem("worked_" + mes);
+      alert("Dados do mês removidos!");
+    }
+  });
+
+  // Botão limpar tudo
+  document.getElementById("btnLimparTudo").addEventListener("click", () => {
+    if (confirm("⚠️ Tem certeza? Isso apagará TODOS os dados do aplicativo.")) {
+      localStorage.clear();
+      alert("Todos os dados foram apagados.");
+    }
+  });
+});
+</script>
+
+</body>
+</html>

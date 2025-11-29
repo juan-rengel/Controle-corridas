@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Registros - MOB</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- Botão hambúrguer -->
+<div class="hamburger" id="hamburger">☰</div>
+
+<!-- Menu lateral -->
+<nav class="sidebar" id="sidebar">
+  <div class="sidebar-title">MOB Menu</div>
+  <a href="Dashboard.html">🏠 Dashboard</a>
+  <a href="Registros.html">📝 Registros</a>
+  <a href="calendario.html">📅 Calendário</a>
+  <a href="Configuracoes.html">⚙️ Configurações</a>
+</nav>
+
+
+<!-- ================== REGISTROS ================== -->
+<h2 style="color:white; text-align:center;">Registros</h2>
+<!-- ===== CARDS DE REGISTRO (VERSÃO PRO) ===== -->
+
+<div class="reg-card fade-in">
+  <div class="reg-icon" style="background:#2980b9;">
+    📆
+  </div>
+  <div class="reg-content">
+    <label>Selecionar Mês/Ano:</label>
+    <select id="selectMes"></select>
+  </div>
+</div>
+
+<div class="reg-card fade-in">
+  <div class="reg-icon" style="background:#9b59b6;">
+    🎯
+  </div>
+  <div class="reg-content">
+    <label>Meta do Mês (R$):</label>
+    <input type="number" id="metaMes" placeholder="Ex: 6800">
+  </div>
+</div>
+
+<div class="reg-card fade-in">
+  <div class="reg-icon" style="background:#2ecc71;">
+    💰
+  </div>
+  <div class="reg-content">
+    <label>Adicionar Ganho do Dia (R$):</label>
+    <input type="number" id="valorDia" placeholder="Ex: 120">
+    <button id="btnAdicionar">Adicionar Ganho</button>
+  </div>
+</div>
+
+<div class="reg-card fade-in">
+  <div class="reg-icon" style="background:#e67e22;">
+    ⛽
+  </div>
+  <div class="reg-content">
+    <label>Gasto com Gasolina (R$):</label>
+    <input type="number" id="gastoGasolina" placeholder="Ex: 80">
+    <button id="btnAdicionarGasto">Registrar Gasto</button>
+  </div>
+</div>
+
+<div class="reg-card fade-in">
+  <div class="reg-icon" style="background:#34495e;">
+    🏦
+  </div>
+  <div class="reg-content">
+    <label>Transferência para Conta (R$):</label>
+    <input type="number" id="transferenciaValor" placeholder="Ex: 150">
+    <button id="btnAdicionarTransferencia">Registrar Transferência</button>
+  </div>
+</div>
+
+<div class="reg-card fade-in">
+  <div class="reg-icon" style="background:#c0392b;">
+    🔧
+  </div>
+  <div class="reg-content">
+    <label>Despesa Mecânica (R$):</label>
+    <input type="number" id="despesaMecanica" placeholder="Ex: 90 (troca de óleo)">
+    <button id="btnAdicionarMecanica">Registrar Despesa</button>
+  </div>
+</div>
+
+<!-- ===== LISTAS PRO ===== -->
+
+<div class="list-card fade-in">
+  <h3>💰 Ganhos Diários</h3>
+  <ul id="listaGanhos" class="pro-list"></ul>
+</div>
+
+<div class="list-card fade-in">
+  <h3>⛽ Gastos com Gasolina</h3>
+  <ul id="listaGastos" class="pro-list"></ul>
+</div>
+
+<div class="list-card fade-in">
+  <h3>🏦 Transferências Registradas</h3>
+  <ul id="listaTransferencias" class="pro-list"></ul>
+</div>
+
+<div class="list-card fade-in">
+  <h3>🔧 Despesas Mecânicas</h3>
+  <ul id="listaMecanicas" class="pro-list"></ul>
+</div>
+
+
+<script src="menu.js"></script>
+<script src="script.js"></script>
+
+</body>
+</html>

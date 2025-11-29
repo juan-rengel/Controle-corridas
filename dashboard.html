@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Dashboard - MOB</title>
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<!-- Botão hambúrguer -->
+<div class="hamburger" id="hamburger">☰</div>
+
+<!-- Menu lateral -->
+<nav class="sidebar" id="sidebar">
+  <div class="sidebar-title">MOB Menu</div>
+  <a href="dashboard.html">🏠 Dashboard</a>
+  <a href="Registros.html">📝 Registros</a>
+  <a href="calendario.html">📅 Calendário</a>
+  <a href="Configuracoes.html">⚙️ Configurações</a>
+</nav>
+
+<!-- LOGO -->
+<div class="logo-container">
+  <img src="MOV.png" alt="Logo MOV" />
+</div>
+
+<!-- CARDS DO DASHBOARD – VERSÃO PRO -->
+<div class="dashboard-cards">
+
+  <!-- GANHOS -->
+  <div class="dash-card fade-in">
+    <div class="dash-icon" style="background:#2ecc71;">
+      <img src="icons/money.svg" class="icon-img">
+    </div>
+    <div class="dash-info">
+      <h3>Ganhos Acumulados</h3>
+      <p id="lucroLiquido">R$ 0,00</p>
+    </div>
+  </div>
+
+  <!-- META -->
+  <div class="dash-card fade-in">
+    <div class="dash-icon" style="background:#3498db;">
+      <img src="icons/target.svg" class="icon-img">
+    </div>
+    <div class="dash-info">
+      <h3>Meta Mensal</h3>
+      <p id="metaExibida">R$ 0,00</p>
+    </div>
+  </div>
+
+  <!-- TRANSFERIDO -->
+  <div class="dash-card fade-in">
+    <div class="dash-icon" style="background:#9b59b6;">
+      <img src="icons/bank.svg" class="icon-img">
+    </div>
+    <div class="dash-info">
+      <h3>Total Transferido</h3>
+      <p id="totalTransferido">R$ 0,00</p>
+    </div>
+  </div>
+
+  <!-- BARRA DE PROGRESSO PREMIUM -->
+<div class="progress-card fade-in">
+  <h3>📈 Progresso da Meta</h3>
+
+  <div class="progress-container">
+    <div class="progress-bar-pro" id="progressFill"></div>
+  </div>
+
+  <p class="progress-text">
+    <span id="progressoPercent">0%</span> concluído
+  </p>
+</div>
+
+</div>
+
+<!-- CARD DE RESUMO PREMIUM -->
+<div class="summary-card fade-in">
+  <h3>📊 Resumo do Mês</h3>
+  <div class="summary-row">
+    <span>Total Ganho:</span>
+    <strong id="totalGanhos">0.00</strong>
+  </div>
+  <div class="summary-row">
+    <span>Gasto com Gasolina:</span>
+    <strong id="totalGastos">0.00</strong>
+  </div>
+</div>
+
+
+<script src="menu.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
