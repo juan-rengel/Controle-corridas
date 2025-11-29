@@ -22,7 +22,8 @@
   });
 
   // ---------------- VARIÁVEIS GERAIS ----------------
-  const selectMes = document.getElementById('selectMes');
+  const selectMes = document.getElementById('selectMesRegistro');
+  console.log("SELECT ENCONTRADO?? →", selectMes);
   const selectMesConfig = document.getElementById('selectMesConfig');
 
   const metaInput = document.getElementById('metaMes');
@@ -87,27 +88,33 @@
   // Preenche selects de mês
   function popularSelectsMes() {
     const meses = listarMeses();
+    const mesAtual = getMesAtual();
+
+    // --- SELECT DA PÁGINA DE REGISTRO ---
     if (selectMes) {
-      selectMes.innerHTML = "";
-      meses.forEach(m => {
-        const option = document.createElement("option");
-        option.value = m;
-        option.textContent = formatarMesAno(m);
-        selectMes.appendChild(option);
-      });
-      selectMes.value = getMesAtual();
+        selectMes.innerHTML = "";
+        meses.forEach(m => {
+            const option = document.createElement("option");
+            option.value = m;
+            option.textContent = formatarMesAno(m);
+            selectMes.appendChild(option);
+        });
+        selectMes.value = mesAtual;
     }
+
+    // --- SELECT DA PÁGINA DE CONFIGURAÇÕES ---
     if (selectMesConfig) {
-      selectMesConfig.innerHTML = "";
-      meses.forEach(m => {
-        const option = document.createElement("option");
-        option.value = m;
-        option.textContent = formatarMesAno(m);
-        selectMesConfig.appendChild(option);
-      });
-      selectMesConfig.value = getMesAtual();
+        selectMesConfig.innerHTML = "";
+        meses.forEach(m => {
+            const option = document.createElement("option");
+            option.value = m;
+            option.textContent = formatarMesAno(m);
+            selectMesConfig.appendChild(option);
+        });
+        selectMesConfig.value = mesAtual;
     }
-  }
+}
+
 
   // Formata "YYYY-MM" para "MM/YYYY"
   function formatarMesAno(mesAno) {
@@ -426,6 +433,26 @@ function atualizarListas() {
   }
 
 
+(function initApp() {
+    console.log("🔥 INICIANDO APP...");
+
+    // Preenche selects
+    popularSelectsMes();
+
+    // Seleciona mês base
+    const mesBase =
+        selectMes && selectMes.value
+            ? selectMes.value
+            : getMesAtual();
+
+    console.log("📅 Mês carregado:", mesBase);
+
+    // Carrega dados do mês
+    carregarDadosMes(mesBase);
+
+    // Atualiza páginas que existirem
+    atualizarResumo();
+})();
 
 
   /* ===========================
